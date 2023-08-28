@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <style>
+      body {
+        font-family: times new roman;
+        background-color: #0da1f8c0;
+        /* perspective: 700; */
+        /* perspective-origin: center; */
+      }
+      #container {
+        position: absolute;
+        width: 340px;
+        height: 400px;
+        padding-top: 20px;
+        background: rgb(0, 0, 0);
+        border-radius: 23px;
+        border: 1px solid #6b6b6be4;
+        left: calc((100vw - 340px) / 2);
+        top: calc((100vh - 400px) / 2);
+        box-shadow: inset -8px -12px 5px #413e3eec,
+          inset 5px 4px 3px rgb(255, 255, 255);
+        /* z-index: 1; */
+      }
+      #container:before {
+        content: "";
+        position: absolute;
+        width: 340px;
+        height: 40px;
+        background-color: black;
+        bottom: -80px;
+        border-radius: 50%;
+        filter: blur(20px);
+        opacity: 0.7;
+      }
+
+      .side {
+        width: 280px;
+        height: 50px;
+        background-color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
+        padding-left: 10px;
+        font-weight: bold;
+        font-size: 25px;
+        outline: none;
+        border: 1px solid white;
+        border-radius: 11px;
+        margin: 15px 0 0 30px;
+        box-shadow: inset -5px -6px 3px #443f3fe2, inset 3px 4px 3px #fffffff5;
+        /* overflow: hidden; */
+      }
+      #btn {
+        position: relative;
+        display: block;
+        width: 220px;
+        height: 40px;
+        background: #242121d4;
+        color: #e2f778;
+        margin: 20px 0px 0px 60px;
+        font-size: 34px;
+        text-align: center;
+        border-radius: 8px;
+        border: 1px solid rgb(255, 255, 255);
+
+        box-shadow: inset -8px -7px 4px #3d3d3deb, inset 8px 4px 3px #ecebeb;
+        font-weight: bolder;
+        outline: none;
+        /* z-index: 1; */
+      }
+      /* #container::after{
+    content:"";
+    position:absolute;
+    width:220px;
+    height:420px;
+    left:-10px;
+    top:0px;
+    background:rgba(15, 4, 4, 0.497);
+    border-radius: 20px;
+    z-index:-1;
+    filter: blur(2px);
+    
+} */
+      #btn:hover {
+        border-color: black;
+      }
+
+      p {
+        /* background-color:white; */
+        padding: 10px;
+        text-align: center;
+        color: rgb(0, 255, 200);
+        font-size: 25px;
+        font-weight: bold;
+      }
+      .side::placeholder {
+        color: white;
+      }
+    </style>
+  </head>
+  <script>
+    function cal() {
+      let a, b, c;
+      a = Number(document.getElementById("ab").value);
+      b = Number(document.getElementById("bc").value);
+      c = Number(document.getElementById("ca").value);
+
+      if (a == "" || a <= 0) {
+        msge.innerHTML = "first side not define\n fill the value.";
+      } else if (b == "" || b <= 0) {
+        msge.innerHTML = "second side not define\t fill the value.";
+      } else if (c == "" || c <= 0) {
+        msge.innerHTML = "third side not define\tfill the value.";
+      } else {
+        if (a != b && a != c) {
+          var d = (a + b + c) / 2;
+          if (d == a) {
+            a = --a;
+          } else if (d == b) {
+            b = --b;
+          } else if (d == c) {
+            c = --c;
+          } else {
+          }
+
+          var f = Math.sqrt(d * (d - a) * (d - b) * (d - c));
+        } else if (a == b && a == c) {
+          var f = (Math.sqrt(3) / 4) * Math.pow(a, 2);
+        } else {
+          if (a == b && a != c) {
+            var f =
+              (1 / 2) * c * Math.sqrt(Math.pow(a, 2) - Math.pow(c, 2) / 4);
+          } else if (a == c && a != b) {
+            var f =
+              (1 / 2) * b * Math.sqrt(Math.pow(a, 2) - Math.pow(b, 2) / 4);
+          } else {
+            var f =
+              (1 / 2) * a * Math.sqrt(Math.pow(b, 2) - Math.pow(a, 2) / 4);
+          }
+        }
+        if (isNaN(f) || f <= 0) {
+          msge.innerHTML = "side value may be incorrect.Check it";
+        } else {
+          var msg = `Area of triangle of sides <b style="color:white;"> ${a},${b},${c} </b> is <b style="color:white;">${f.toFixed(
+            2
+          )} </b> Centimetres`;
+          document.getElementById("msge").innerHTML = msg;
+          document.getElementById("ab").value = "";
+          document.getElementById("bc").value = "";
+          document.getElementById("ca").value = "";
+        }
+      }
+    }
+  </script>
+  <body>
+    <h1 style="color: black; margin: 0px; padding: 0px">
+      <marquee style="background-color: orange">Created by Coding EG</marquee>
+    </h1>
+    <div id="container">
+      <input
+        id="ab"
+        type="number"
+        class="side"
+        placeholder="First side of triangle in cm"
+      /><br />
+      <input
+        id="bc"
+        type="number"
+        class="side"
+        placeholder="Second side of triangle in cm"
+      /><br />
+      <input
+        id="ca"
+        type="number"
+        class="side"
+        placeholder="Third side of triangle in cm"
+      />
+
+      <button value="Enter" id="btn" onclick="cal()">Enter</button>
+      <p id="msge"></p>
+    </div>
+  </body>
+</html>

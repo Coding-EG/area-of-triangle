@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <style>
+      body {
+        font-family: times new roman;
+        background-color: rgba(240, 240, 240);
+      }
+      #container {
+        position: absolute;
+        width: 300px;
+        height: 400px;
+        background: rgba(240, 240, 240);
+        border-radius: 13px;
+        left: calc((100vw - 300px) / 2);
+        top: calc((100vh - 400px) / 2);
+        box-shadow: 4px 5px 6px rgba(1, 0, 0, 0.888),
+          -9px -7px 5px rgba(255, 255, 255, 0.985);
+      }
+
+      .side {
+        width: 280px;
+        height: 50px;
+        background-color: rgba(238, 238, 238, 0.905);
+        color: rgb(0, 0, 0);
+        border-radius: 11px;
+        font-weight: bold;
+        font-size: 25px;
+        outline: none;
+        border: none;
+        margin: 10px;
+        box-shadow: inset 4px 5px 3px rgba(31, 28, 28, 0.744),
+          inset -4px -5px 3px rgb(255, 255, 255);
+      }
+      #btn {
+        width: 220px;
+        height: 40px;
+        background: rgba(240, 240, 240, 0.879);
+        color: rgb(13, 31, 120);
+        margin: 20px 0px 0px 40px;
+        font-size: 34px;
+        text-align: center;
+        border-radius: 8px;
+        border: 1px solid rgb(221, 221, 221);
+        box-shadow: 4px 4px 3px rgba(25, 23, 23, 0.812),
+          -8px -6px 8px rgb(255, 255, 255);
+        font-weight: bolder;
+        outline: none;
+      }
+      #btn:hover {
+        box-shadow: inset 4px 5px 4px rgba(18, 12, 12, 0.722),
+          inset -4px -5px 6px rgb(255, 255, 255);
+      }
+
+      p {
+        /* background-color:white; */
+        padding: 10px;
+        text-align: center;
+        color: rgb(255, 0, 0);
+        font-size: 25px;
+      }
+    </style>
+  </head>
+  <script>
+    function cal() {
+      var a = Number(document.getElementById("ab").value);
+
+      var b = Number(document.getElementById("bc").value);
+      var c = Number(document.getElementById("ca").value);
+
+      if (a == "" || a == 0) {
+        msge.innerHTML = "first side not define\n fill the value.";
+      } else if (b == "" || b == 0) {
+        msge.innerHTML = "second side not define\t fill the value.";
+      } else if (c == "" || c == 0) {
+        msge.innerHTML = "third side not define\tfill the value.";
+      } else {
+        if (a != b && a != c) {
+          var d = (a + b + c) / 2;
+          if (d == a) {
+            a = --a;
+          } else if (d == b) {
+            b = --b;
+          } else if (d == c) {
+            c = --c;
+          } else {
+          }
+
+          var f = Math.sqrt(d * (d - a) * (d - b) * (d - c));
+        } else if (a == b && a == c) {
+          var f = (Math.sqrt(3) / 4) * Math.pow(a, 2);
+        } else {
+          if (a == b) {
+            var f = (2 * a * c - Math.pow(c, 2)) / 4;
+          } else if (a == c) {
+            var f = (2 * a * b - Math.pow(b, 2)) / 4;
+          } else {
+          }
+        }
+        if (isNaN(f) || f == 0) {
+          msge.innerHTML = "sorry for this.";
+        } else {
+          var msg =
+            "Area of triangle is equal to " + f.toFixed(2) + "\nCentimetres";
+          document.getElementById("msge").innerHTML = msg;
+        }
+      }
+    }
+  </script>
+  <body>
+    <h1 style="color: black; margin: 0px; padding: 0px">
+      <marquee style="background-color: orange">Created by Coding EG</marquee>
+    </h1>
+    <div id="container">
+      <input
+        id="ab"
+        type="number"
+        class="side"
+        placeholder="First side of triangle in cm"
+      /><br />
+      <input
+        id="bc"
+        type="number"
+        class="side"
+        placeholder="Second side of triangle in cm"
+      /><br />
+      <input
+        id="ca"
+        type="number"
+        class="side"
+        placeholder="Third side of triangle in cm"
+      /><br />
+
+      <input type="button" value="Enter" id="btn" onclick="cal()" /> <br />
+      <div><p id="msge"></p></div>
+    </div>
+  </body>
+</html>
